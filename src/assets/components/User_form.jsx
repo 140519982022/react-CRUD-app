@@ -18,19 +18,58 @@ function UserForm({ getFormDetails, errorKey }) {
         // console.log(event.target.name.value,event.target.email.value,event.target.mobile_number.value,event.target.password.value);
 
         const email = event.target.email.value;
+        const mobNo = event.target.mobile_number.value
+        const password = event.target.password.value
 
-        const emailExists = errorKey.some((userInfo) => userInfo.email === email);
+        const emailExists = errorKey.some((userInfo) => userInfo.email === email );
+        const mobNoExists = errorKey.some((userInfo) => userInfo.mobNo === mobNo);
+        const passwordExists = errorKey.some((userInfo) =>  userInfo.password === password);
+        
 
-        if (emailExists) {
+        if (emailExists || mobNoExists || passwordExists) {
+            let errorMessageKey,errorName = '';
 
+            if (emailExists) {
+                errorMessageKey = email;
 
-            setErrorMessage(`${email} - This email id is already exists`);
+                errorName = "Email";
+
+            } else if (mobNoExists) {
+                errorMessageKey = mobNo;
+                errorName = "Mobile number";
+            } else if (passwordExists) {
+                errorMessageKey = password;
+                errorName = "Password";
+
+            }
+        
+            setErrorMessage(`${errorMessageKey} - This ${errorName} is already exists`);
+
+            
+
+            // setErrorMessage(`${errorKey} - This is already exists`);
 
             setTimeout(() => {
                 setErrorMessage('')
-            }, 1000)
+            }, 2000)
             return;
         }
+        // if (mobNoExists) {
+        //     setErrorMessage(`${mobNo} - This mobile number id is already exists`);
+
+        //     setTimeout(() => {
+        //         setErrorMessage('')
+        //     }, 2000)
+        //     return;
+        // }
+        // if (passwordExists) {
+        //     setErrorMessage(`${password} - This password id is already exists`);
+
+        //     setTimeout(() => {
+        //         setErrorMessage('')
+        //     }, 2000)
+        //     return;
+        // }
 
         let personArr =
         {

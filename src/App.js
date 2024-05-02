@@ -12,6 +12,8 @@ import React, { useState, useRef } from 'react';
 function App() {
   const [finalUserArr, AllUserDetails] = useState([]);
 
+  console.table(finalUserArr);
+
   const viewUserDetailsRef = useRef(null);
 
   let submitForm = (userDetails) => {
