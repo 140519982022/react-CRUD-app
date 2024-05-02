@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import eagle from '../images/eagle.jpg';
-import '../css/userForm.css'
+import '../css/userForm.css';
 
+// import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
 
-function UserForm({getFormDetails,errorKey}) {
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+function UserForm({ getFormDetails, errorKey }) {
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -18,13 +23,13 @@ function UserForm({getFormDetails,errorKey}) {
 
         if (emailExists) {
 
-            
+
             setErrorMessage(`${email} - This email id is already exists`);
 
-            setTimeout(()=>{
-                 setErrorMessage('')
-            },2000)
-            return; 
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 1000)
+            return;
         }
 
         let personArr =
@@ -39,9 +44,11 @@ function UserForm({getFormDetails,errorKey}) {
         getFormDetails(personArr);
 
         setErrorMessage('');
-
-        event.target.reset(); // Reset the form fields
-
+        // toast.success('New Record Added Successfully');
+        
+        NotificationManager.success('New Record Added Successfully', 'Success message');
+        
+        event.target.reset();
     }
 
     return (
@@ -50,13 +57,15 @@ function UserForm({getFormDetails,errorKey}) {
             <div className="container-fluid">
                 <div className="container ">
 
-                    <div className="row mt-3 d-flex justify-content-between">
+                    <div className="row d-flex justify-content-between">
                         <div className="col-md-6 align-self-center">
-                            <h1 className='text-primary fw-bold py-5'>Register Here</h1>
-                            <form onSubmit={formHandeler} >
-                            {errorMessage && <p className="bg-danger-subtle text-danger-emphasis form-control border border-danger">{errorMessage}</p>}
+                            <h1 className='text-primary fw-bold pb-4'>Register Here</h1>
+
+                            <NotificationContainer/>
+                            <form onSubmit={formHandeler}  >
+                                {errorMessage && <p className="bg-danger-subtle text-danger-emphasis form-control border border-danger">{errorMessage}</p>}
                                 <div className="form-floating mb-3">
-                                    <input type="text" name="name" className="form-control border border-primary " id="floatingInput" placeholder="name" autoFocus required/>
+                                    <input type="text" name="name" className="form-control border border-primary " id="floatingInput" placeholder="name" autoFocus required />
                                     <label for="floatingInput">User Name</label>
                                 </div>
                                 <div className="form-floating mb-3">
@@ -72,14 +81,15 @@ function UserForm({getFormDetails,errorKey}) {
                                     <input type="password" name="password" className="form-control border border-primary" placeholder="Password" required />
                                     <label for="floatingPassword">Password</label>
                                 </div>
-                                
-                                <button type="submit" className="btn btn-success form-control">Submit</button>
+
+                                <button type="submit" className="btn btn-success form-control" >Submit</button>
 
                             </form>
 
                         </div>
                         <div className="col-md-6">
-                            <div>
+
+                            <div className='pt-5'>
                                 <img src={eagle} alt="img" className='setImg' />
                             </div>
 

@@ -1,33 +1,24 @@
+import React from 'react';
 import Table from 'react-bootstrap/Table';
+import { MdDelete, MdEditSquare } from "react-icons/md";
 
-// add icons
-import { MdDelete } from "react-icons/md";
-import { MdEditSquare } from "react-icons/md";
+// import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 function ViewUserDetails({ finalUserArr, deleteId }) {
-
-    if (!finalUserArr || finalUserArr.length === 0) {
-        // alert("Something went wrong or there are no users!");
-        return null; // If finalUserArr is empty, return null to hide the table
-    }
-
-    // delete user details strat functionality
     let deleteUser = (userId) => {
         deleteId(userId);
+        // toast.error("record deleted successfully...");
+        NotificationManager.error('Record deleted successfully', 'Delete message');
     }
-    // delete user details end functionality
 
-
-    // edit user details strat functionality
-    // let editUser = (userData) => {
-
-    //     editUser(userData);
-    // }
-    // edit user details strat functionality
-
-    console.log("empty array -> " + finalUserArr);
     return (
         <>
+            {/* <ToastContainer /> */}
+            <NotificationContainer/>
             <div className='container-fluid'>
                 <div className='container'>
                     <div className='row'>
@@ -45,20 +36,25 @@ function ViewUserDetails({ finalUserArr, deleteId }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {finalUserArr.map((user, index) => (
+                                    {finalUserArr && finalUserArr.length > 0 ? (
+                                        finalUserArr.map((user, index) => (
+                                            <tr key={user.id}>
+                                                <td className='fw-bold'>{index + 1}.</td>
+                                                <td>{user.name}</td>
+                                                <td>{user.email}</td>
+                                                <td>{user.mobNo}</td>
+                                                <td>{user.password}</td>
+                                                <td>
+                                                    <MdDelete className='fs-1 text-white' onClick={() => deleteUser(user.id)} />
+                                                    <MdEditSquare className='fs-2 text-white' />
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
                                         <tr>
-                                            <td className='fw-bold'>{index + 1}.</td>
-                                            <td>{user.name}</td>
-                                            <td>{user.email}</td>
-                                            <td>{user.mobNo}</td>
-                                            <td>{user.password}</td>
-                                            <td>
-                                                <MdDelete className='fs-1 text-white' onClick={() => deleteUser(user.id)} />
-
-                                                <MdEditSquare className='fs-2 text-white'/>
-                                            </td>
+                                            <td colSpan="6" className="text-center">No records found</td>
                                         </tr>
-                                    ))}
+                                    )}
                                 </tbody>
                             </Table>
                         </div>
