@@ -33,7 +33,6 @@ function ViewUserDetails({ finalUserArr, deleteId }) {
                     <div className='row'>
                         <div className='col-md-12'>
                             <h1 className=' fw-bold py-3'>USER DETAIL</h1>
-
                             <Table striped bordered hover variant="dark">
                                 <thead>
                                     <tr>

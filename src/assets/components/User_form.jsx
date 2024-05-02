@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import eagle from '../images/eagle.jpg'
+import eagle from '../images/eagle.jpg';
+import '../css/userForm.css'
 
 
 function UserForm({getFormDetails,errorKey}) {
@@ -49,7 +50,7 @@ function UserForm({getFormDetails,errorKey}) {
             <div className="container-fluid">
                 <div className="container ">
 
-                    <div className="row my-5 d-flex justify-content-between">
+                    <div className="row mt-3 d-flex justify-content-between">
                         <div className="col-md-6 align-self-center">
                             <h1 className='text-primary fw-bold py-5'>Register Here</h1>
                             <form onSubmit={formHandeler} >
@@ -79,7 +80,7 @@ function UserForm({getFormDetails,errorKey}) {
                         </div>
                         <div className="col-md-6">
                             <div>
-                                <img src={eagle} alt="img" />
+                                <img src={eagle} alt="img" className='setImg' />
                             </div>
 
                         </div>
