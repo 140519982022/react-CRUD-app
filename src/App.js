@@ -29,18 +29,19 @@ function App() {
   }
 
 
-  // let editUserFunction = (userDetails) => {
+  let editUserFunction = (editUserDetails) => {
 
-  //   console.log(userDetails);
+    console.log("edit user details in app component" + editUserDetails);
+    AllUserDetails([editUserDetails]);
 
-  // }
+  }
 
   return (
     <div className="App">
 
-      <UserForm getFormDetails={submitForm}></UserForm>
+      <UserForm getFormDetails={submitForm} errorKey={finalUserArr}></UserForm>
 
-      <ViewUserDetails finalUserArr={finalUserArr} deleteId={deleteFunctionality}></ViewUserDetails>
+      <ViewUserDetails finalUserArr={finalUserArr} deleteId={deleteFunctionality} editUser={editUserFunction}></ViewUserDetails>
     </div>
   );
 }
